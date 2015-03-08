@@ -31,7 +31,6 @@ def check_earthquakes(min_offset=5, distance_cutoff=200):
     print 'number of earthquakes: %s' % (len(earthquakes), )
     for quake in reversed(earthquakes):
         then = get_datetime(quake)
-        print then
         if then > time_offset:
             point = quake.find('georss:point').text
             lat, lon = [float(_) for _ in point.split(' ')]
