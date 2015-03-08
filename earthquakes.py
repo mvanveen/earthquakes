@@ -7,9 +7,11 @@ from geopy import Point
 from geopy.distance import vincenty
 import requests
 
-EARTHQUAKES_FEED = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom'
+EARTHQUAKES_FEED = 'http://earthquake.usgs.gov/earthquakes'\
+                   '/feed/v1.0/summary/2.5_week.atom'
 IMAGEWRITER_URL = os.environ['IMAGEWRITER_URL']
 HOME = Point(os.environ['HOME_LAT'], os.environ['HOME_LON'])
+
 
 def get_feed():
     res = requests.get(EARTHQUAKES_FEED)
@@ -41,10 +43,10 @@ def check_earthquakes(min_offset=5, distance_cutoff=200):
                 title = quake.find('title').text
                 text = '%s (%s)\n' \
                        '-------------------------------%s' % (
-                    title,
-                    point,
-                    then
-                )
+                           title,
+                           point,
+                           then
+                       )
 
                 print text
                 requests.get('%s%s' % (
@@ -54,4 +56,3 @@ def check_earthquakes(min_offset=5, distance_cutoff=200):
 
 if __name__ == '__main__':
     check_earthquakes()
-    #print get_feed()[0]
